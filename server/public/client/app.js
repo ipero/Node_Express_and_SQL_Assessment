@@ -3,40 +3,31 @@ $(document).ready(function() {
   getAnimals();
 });
 
+//Send new animal type to Server
 function addAnimal() {
   var animal = $('.animal-name').val();
-  console.log(animal);
-  sendDataToServer(animal);
   $('.animal-name').val('');
-}
-
-function sendDataToServer(animalName) {
-  console.log(animalName);
   $.ajax({
     type: 'POST',
     url: '/animals',
-    data: {"name":animalName},
-    success: handleServerResponse
+    data: {"name":animal},
+    success: getAnimals
   });
 }
 
-function handleServerResponse(response) {
-  console.log('Server says: ', response);
-  getAnimals();
-}
-
+// Get all animals in DB
 function getAnimals() {
   $.ajax({
     type: 'GET',
     url: '/animals',
-    success: updateSelect
+    success: updateDom
   })
 }
-
-function updateSelect(serverResponse) {
-  console.log(serverResponse);
+// Display all animals from DB to the DOM
+function updateDom(animals) {
   $('.animals').empty();
-  serverResponse.forEach(function(animal){
-    $('.animals').append('<p>We have ' + animal.animal_type +'s(es) in quantity of '+animal.quantity +'</p>');
+  animals.forEach(function(animal){
+    $('.animals').append('<p>We have ' + animal.animal_type +
+    '(s/es) in quantity of '+animal.quantity +'</p>');
   });
 }

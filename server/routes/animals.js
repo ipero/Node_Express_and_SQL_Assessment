@@ -41,9 +41,7 @@ animals.get('/', function(req,res){
 
 // ADD NEW ANIMAL TO DB
 animals.post('/', function(req, res){
-  console.log(req.body);
-
-
+  
   pg.connect(connectString, function(err, client, done){
     if(err){
       done();
@@ -68,40 +66,5 @@ animals.post('/', function(req, res){
     }
   });
 });
-
-// employees.put('/', function(req, res){
-//   console.log(req.body);
-//   var empID = req.body.employeeid;
-//
-//
-//   pg.connect(connectString, function(err, client, done){
-//     if(err){
-//       done();
-//       console.log('Error connecting to DB ', err);
-//       res.status(500).send(err);
-//     }else{
-//
-//       var query = client.query('UPDATE employees SET status ='+
-//       'CASE '+
-//         'WHEN status=true'+
-//         'THEN false'+
-//         'ELSE true'+
-//       'END'+
-//        'WHERE employee_id = '+empID+';');
-//
-//       query.on('end', function() {
-//         done();
-//         res.status(200).send();
-//       });
-//
-//       query.on('error', function(error) {
-//         console.log('Error running query:', error);
-//         done();
-//         res.status(500).send(error);
-//       });
-//     }
-//   });
-// });
-//
 
 module.exports = animals;

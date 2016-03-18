@@ -18,9 +18,8 @@ if (process.env.DATABASE_URL) {
 pg.connect(connectionString, function(err, client, done){
   if (err) {
     console.log('Error connecting to DB!', err);
-    //TODO end process with error code
   } else {
-    var query = client.query('CREATE TABLE IF NOT EXISTS people (' +
+    var query = client.query('CREATE TABLE IF NOT EXISTS animals (' +
     'id SERIAL PRIMARY KEY,' +
     'name varchar(80) NOT NULL);'
   );
@@ -48,7 +47,7 @@ app.use('/animals', animals);
 
 app.get('/*', function(req, res){
   var filename = req.params[0] || 'views/index.html';
-  res.sendFile(path.join(__dirname, '/public/', filename)); // ..../server/public/filename
+  res.sendFile(path.join(__dirname, '/public/', filename)); 
 });
 
 app.listen(port, function(){
