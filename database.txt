@@ -1,0 +1,6 @@
+CREATE TABLE "animals" (
+    "id" serial,
+    "animal_type" varchar(120) NOT NULL,
+    "quantity" integer,
+    PRIMARY KEY ("id")
+);
