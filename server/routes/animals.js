@@ -28,6 +28,7 @@ animals.get('/', function(req,res){
         result.push(row);
       });
       query.on('end', function(){
+        done(); 
         res.send(result);
       });
       query.on('error', function(error){
@@ -41,7 +42,7 @@ animals.get('/', function(req,res){
 
 // ADD NEW ANIMAL TO DB
 animals.post('/', function(req, res){
-  
+
   pg.connect(connectString, function(err, client, done){
     if(err){
       done();
