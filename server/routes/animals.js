@@ -4,7 +4,7 @@ var path = require("path");
 var pg = require("pg");
 var randomNumber = require('./randomnum.js');
 
-var connectString;
+var connectString = '';
 
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = true;
@@ -28,7 +28,7 @@ animals.get('/', function(req,res){
         result.push(row);
       });
       query.on('end', function(){
-        done(); 
+        done();
         res.send(result);
       });
       query.on('error', function(error){

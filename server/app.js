@@ -10,12 +10,12 @@ var connectString = '';
 
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = true;
-  connectionString = process.env.DATABASE_URL;
+  connectString = process.env.DATABASE_URL;
 } else {
-  connectionString = 'postgres://localhost:5432/zoo';
+  connectString = 'postgres://localhost:5432/zoo';
 }
 
-pg.connect(connectionString, function(err, client, done){
+pg.connect(connectString, function(err, client, done){
   if (err) {
     console.log('Error connecting to DB!', err);
   } else {
@@ -47,7 +47,7 @@ app.use('/animals', animals);
 
 app.get('/*', function(req, res){
   var filename = req.params[0] || 'views/index.html';
-  res.sendFile(path.join(__dirname, '/public/', filename)); 
+  res.sendFile(path.join(__dirname, '/public/', filename));
 });
 
 app.listen(port, function(){
