@@ -21,7 +21,7 @@ pg.connect(connectString, function(err, client, done){
   } else {
     var query = client.query('CREATE TABLE IF NOT EXISTS animals (' +
     'id SERIAL PRIMARY KEY,' +
-    'name varchar(80) NOT NULL);'
+    'animal_type varchar(120) NOT NULL, quantity int);'
   );
 
   query.on('end', function(){
